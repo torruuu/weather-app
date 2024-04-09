@@ -1,10 +1,10 @@
 <script setup>
-
+    import WeatherIcon from '@/components/icons/WeatherIcon96.vue'
 </script>
 
 <template>
     <div class="aside-container">
-
+        <WeatherIcon />
     </div>
 </template>
 
