@@ -1,11 +1,17 @@
 <script setup>
   import AsideData from '@/components/AsideData.vue';
+  import UnitButtons from '@/components/UnitButtons.vue';
   import { getWeather } from '@/composables/getWeather';
   import { useWeatherStore } from '@/stores/weather';
-  import { onMounted, ref  } from 'vue';
+  import { onMounted, ref, watch  } from 'vue';
 
   const store = useWeatherStore();
   const weatherData = ref(null);
+
+  watch(store, () => {
+    console.log('storeeeeeeeee')
+    weatherData.value = store.getWeatherData;
+  })
 
   onMounted(async () => {
     getWeather()
@@ -28,7 +34,9 @@
         :unit="weatherData?.unit.symbol"
       />
     </div>
-    <div class="main__right-col"></div>
+    <div class="main__right-col">
+      <UnitButtons v-if="weatherData"/>
+    </div>
   </main>
 </template>
 
@@ -38,5 +46,9 @@
     height: 100vh;
     display: grid;
     grid-template-columns: 3fr 7fr;
+
+    &__left-col {
+      background-color: map-get($map: $colors, $key: c-section-background);
+    }
   }
 </style>

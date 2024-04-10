@@ -7,11 +7,11 @@ export const useWeatherStore = defineStore('weather', {
         unit: { name: 'celsius', symbol: 'ºC' }
     }),
     getters: {
-        getWeatherData() {
+        getWeatherData: (state) => {
             return {
-                city: this.city,
-                data: this.data,
-                unit: this.unit
+                city: state.city,
+                data: state.data,
+                unit: state.unit
             };
         }
     },
@@ -20,5 +20,8 @@ export const useWeatherStore = defineStore('weather', {
             this.data = newWeatherData;
             this.city = newCity;
         },
+        setUnit(newUnit) {
+            this.unit = newUnit;
+        }
     },
 });

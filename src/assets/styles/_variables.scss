@@ -1,6 +1,15 @@
 // ------------- COLORES ----------------
 
 $colors: (
+    "c-black": #000,
+    "c-white": #fff,
     "c-main-background": #00001b,
-    "c-section-background": #27273b
+    "c-section-background": #27273b,
+    "c-button-background": #484870
+);
+
+// ------------- FONT-SIZES ----------------
+
+$font-sizes: (
+    "fs-button": 1rem
 );

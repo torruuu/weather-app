@@ -46,6 +46,5 @@
     .aside-container {
         width: 100%;
         height: 100%;
-        background-color: map-get($map: $colors, $key: c-section-background);
     }
 </style>
