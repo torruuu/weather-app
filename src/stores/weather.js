@@ -2,16 +2,23 @@ import { defineStore } from 'pinia'
 
 export const useWeatherStore = defineStore('weather', {
     state: () => ({
-       weatherData: null
+        city: null,
+        data: null,
+        unit: { name: 'celsius', symbol: 'ºC' }
     }),
     getters: {
         getWeatherData() {
-            return this.weatherData;
+            return {
+                city: this.city,
+                data: this.data,
+                unit: this.unit
+            };
         }
     },
     actions: {
-        setWeatherData(newWeatherData) {
-            this.weatherData = newWeatherData;
+        setWeatherData(newCity, newWeatherData) {
+            this.data = newWeatherData;
+            this.city = newCity;
         },
     },
 });
