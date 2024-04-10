@@ -1,5 +1,5 @@
 <script setup>
-    import { useIconsStore } from '@/stores/icons';
+import { useIconsStore } from '@/stores/icons';
     import { onBeforeMount, defineAsyncComponent, ref } from 'vue';
 
     const iconStore = useIconsStore();
@@ -7,15 +7,19 @@
     let WeatherIcon;
 
     const props = defineProps({
-        city: {
-            type: String,
+        date: {
+            type: Object,
             required: true
         },
-        iconCode: {
+        weatherCode: {
             type: Number,
             required: true
         },
-        temperature: {
+        max: {
+            type: Number,
+            required: true
+        },
+        min: {
             type: Number,
             required: true
         },
@@ -23,28 +27,27 @@
             type: String,
             required: true
         }
-    })
+    });
 
     onBeforeMount(async () => {
-        const src = iconStore.getSrc(props.iconCode);
-        description.value = iconStore.getDesc(props.iconCode);
-        console.log(src);
+        const src = iconStore.getSrc(props.weatherCode);
+        description.value = iconStore.getDesc(props.weatherCode);
         WeatherIcon = defineAsyncComponent(() => import(src));
     })
 </script>
 
 <template>
-    <div class="aside-container">
-        <h1>{{ city }}</h1>
+    <article class="forecast-card">
+        <h3>{{ date.isTomorrow ? 'Tomorrow' : date.dayOfWeek }}</h3>
+        <h1>{{ max }} {{ min }} {{ unit }}</h1>
         <WeatherIcon />
-        <h1>{{ temperature }} {{ unit }}</h1>
-        <h2>{{ description }}</h2>
-    </div>
+    </article>
 </template>
 
 <style lang="scss" scoped>
-    .aside-container {
-        width: 100%;
-        height: 100%;
+    .forecast-card {
+        width: 5rem;
+        height: 10rem;
+        background-color: map-get($map: $colors, $key: c-section-background);
     }
 </style>

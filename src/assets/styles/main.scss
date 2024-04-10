@@ -6,6 +6,7 @@
 * {
   box-sizing: border-box;
   overflow-x: hidden;
+  color: map-get($map: $colors, $key: c-white);
 }
 
 body {

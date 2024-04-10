@@ -1,6 +1,7 @@
 <script setup>
   import AsideData from '@/components/AsideData.vue';
   import UnitButtons from '@/components/UnitButtons.vue';
+  import ForecastGallery from '@/components/ForecastGallery.vue';
   import { getWeather } from '@/composables/getWeather';
   import { useWeatherStore } from '@/stores/weather';
   import { onMounted, ref, watch  } from 'vue';
@@ -11,7 +12,8 @@
   watch(store, () => {
     console.log('storeeeeeeeee')
     weatherData.value = store.getWeatherData;
-  })
+    console.log(weatherData);
+  });
 
   onMounted(async () => {
     getWeather()
@@ -35,7 +37,15 @@
       />
     </div>
     <div class="main__right-col">
-      <UnitButtons v-if="weatherData"/>
+      <UnitButtons
+        v-if="weatherData"
+        :currentUnit="weatherData?.unit.name"
+      />
+      <ForecastGallery
+        v-if="weatherData"
+        :weatherData="weatherData?.data.daily"
+        :unit="weatherData?.unit.symbol"
+      />
     </div>
   </main>
 </template>

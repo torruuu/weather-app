@@ -3,21 +3,23 @@
     import { useWeatherStore } from '@/stores/weather';
     import { ref, watch } from 'vue';
 
-    const store = useWeatherStore();
-    const currentUnit = ref(store.getWeatherData.unit.name);
-    const { setUnit } = store;
-    const celsius = ref(currentUnit.value === 'celsius' ? true : false);
+    const props = defineProps({
+        currentUnit: {
+            type: String,
+            required: true
+        }
+    });
 
-    watch(store, () => {
-        currentUnit.value = store.getWeatherData.unit.name;
-    })
+    const store = useWeatherStore();
+    const { setUnit } = store;
+    const celsius = ref(props.currentUnit === 'celsius' ? true : false);
 
     watch(celsius, () => {
         celsius.value ?
             setUnit({ name: 'celsius', symbol: 'ºC' }) :
             setUnit({ name: 'fahrenheit', symbol: 'ºF' });
         getWeather();
-    }) 
+    });
 </script>
 
 <template>

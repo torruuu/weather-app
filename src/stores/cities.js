@@ -7,7 +7,7 @@ export const useCityCoordinatesStore = defineStore('cityCoordinates', {
             { name: 'Paris', latitude: 48.8566, longitude: 2.3522 },
             // Agrega más ciudades aquí
         ],
-        actualCity: { name: 'Madrid', latitude: 40.4168, longitude: -3.7038 }
+        actualCity: { name: 'Paris', latitude: 48.8566, longitude: 2.3522 }
     }),
     getters: {
         getCityCoordinates(cityName) {
