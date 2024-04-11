@@ -8,8 +8,12 @@ export function getDay(timestamp) {
     const isTomorrow = date.toDateString() === tomorrow.toDateString();
 
     // Devolver el día de la semana en español
-    const dias = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const dayOfWeek = dias[date.getDay()];
+    // const dias = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    // const dayOfWeek = dias[date.getDay()];
 
-    return { isToday, isTomorrow, dayOfWeek }
+    const dayNumber = date.getDate();
+    const monthName = date.toLocaleString('en-US', { month: 'short' });
+    const dayOfWeek = date.toLocaleString('en-US', { weekday: 'short' });
+
+    return { isToday, isTomorrow, dayOfWeek, dayNumber, monthName }
 }

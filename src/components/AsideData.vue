@@ -34,12 +34,12 @@
 </script>
 
 <template>
-    <div class="aside-container">
+    <article class="aside-container">
         <h1>{{ city }}</h1>
         <WeatherIcon />
         <h1>{{ temperature }} {{ unit }}</h1>
         <h2>{{ description }}</h2>
-    </div>
+    </article>
 </template>
 
 <style lang="scss" scoped>

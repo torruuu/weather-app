@@ -3,7 +3,7 @@
 </style>
 
 <template>
-    <svg width="56" height="48" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <svg width="56" height="48" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 48" preserveAspectRatio="xMidYMid meet">
   <defs>
     <filter id="blur" x="-.20655" y="-.21122" width="1.403" height="1.4997">
       <feGaussianBlur in="SourceAlpha" stdDeviation="3" />

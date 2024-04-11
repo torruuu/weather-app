@@ -1,5 +1,5 @@
 <script setup>
-    import ForecastCard from '@/components/ForecastCard.vue';
+    import ForecastDailyCard from '@/components/ForecastDailyCard.vue';
     import { getDay } from '@/utils/getDay';
 
     const props = defineProps({
@@ -23,9 +23,8 @@
 </script>
 
 <template>
-    <section class="forecast-gallery">
-        <h1>Galería</h1>
-        <ForecastCard
+    <article class="forecast-gallery">
+        <ForecastDailyCard
             v-for="(code, index) in weatherCodes.slice(1)"
             :key="index"
             :weatherCode="code"
@@ -34,9 +33,14 @@
             :min="minTemps.slice(1)[index]"
             :unit="unit"
         />
-    </section>
+    </article>
 </template>
 
 <style lang="scss" scoped>
-
+    .forecast-gallery {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+        gap: 2rem;
+    }
 </style>
