@@ -4,21 +4,31 @@
   import ForecastDailyGallery from '@/components/ForecastDailyGallery.vue';
   import { getWeather } from '@/composables/getWeather';
   import { useWeatherStore } from '@/stores/weather';
+  import { useCityCoordinatesStore } from '@/stores/cities';
   import { onMounted, ref, watch  } from 'vue';
 
-  const store = useWeatherStore();
+  const weatherStore = useWeatherStore();
+  const citiesStore = useCityCoordinatesStore();
   const weatherData = ref(null);
 
-  watch(store, () => {
+  watch(weatherStore, () => {
     console.log('storeeeeeeeee')
-    weatherData.value = store.getWeatherData;
-    console.log(weatherData);
+    weatherData.value = weatherStore.getWeatherData;
+    console.log(weatherData.value);
+  });
+
+  watch(citiesStore, () => {
+    getWeather()
+      .then(() => {
+        weatherData.value = weatherStore.getWeatherData;
+      })
+      .catch((error) => console.log(error));
   });
 
   onMounted(async () => {
     getWeather()
       .then(() => {
-        weatherData.value = store.getWeatherData;
+        weatherData.value = weatherStore.getWeatherData;
         console.log(weatherData);
       })
       .catch((error) => console.log(error));
@@ -30,10 +40,6 @@
     <section class="main__left-col">
       <AsideData
         v-if="weatherData"
-        :city="weatherData?.city"
-        :iconCode="weatherData?.data.current.weather_code"
-        :temperature="weatherData?.data.current.temperature_2m"
-        :unit="weatherData?.unit.symbol"
       />
     </section>
     <section class="main__right-col">
@@ -65,7 +71,6 @@
 
     &__right-col {
       padding: 2rem 0;
-      overflow-y: scroll;
     }
 
     &__right-data {

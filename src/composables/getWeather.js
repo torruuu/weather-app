@@ -1,5 +1,5 @@
-import { useCityCoordinatesStore } from '@/stores/cities'
-import { useWeatherStore } from '@/stores/weather'
+import { useCityCoordinatesStore } from '@/stores/cities';
+import { useWeatherStore } from '@/stores/weather';
 
 export async function getWeather() {
     const { actualCity } = useCityCoordinatesStore();
