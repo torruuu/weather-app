@@ -1,6 +1,7 @@
 <script setup>
     import AsideNav from '@/components/AsideNav.vue';
     import CurrentLocation from '@/components/icons/CurrentLocation.vue';
+    import LocationIcon from '@/components/icons/LocationIcon.vue';
     import { getIcon } from '@/utils/getIcon';
     import { getDay } from '@/utils/getDay';
     import { useCityCoordinatesStore } from '@/stores/cities';
@@ -9,8 +10,8 @@
 
     const weatherStore = useWeatherStore();
     const { setActualCity } = useCityCoordinatesStore();
-    const description = ref(null);
     const date = getDay(weatherStore.data.current.time);
+    const description = ref(null);
     const showNav = ref(false);
     let WeatherIcon;
 
@@ -24,7 +25,6 @@
     onBeforeMount(async () => {
         const { src, description: desc } = await getIcon(weatherStore.data.current.weather_code);
         description.value = desc;
-        console.log(src);
         WeatherIcon = defineAsyncComponent(() => import(src));
     })
 </script>
@@ -47,11 +47,14 @@
             <div class="weather__icon">
                 <WeatherIcon v-if="WeatherIcon" />
             </div>
-            <h1 class="weather__temp">{{ weatherStore.data.current.temperature_2m }} <span class="weather__span"> {{ weatherStore.unit.symbol }}</span></h1>
+            <h1 class="weather__temp">{{ weatherStore.data.current.temperature_2m }} <span class="weather__span">{{ weatherStore.unit.symbol }}</span></h1>
             <h2 class="weather__desc">{{ description }}</h2>
             <div class="weather__info">
                 <h3 class="weather__h3">{{ 'Today - ' +  date.dayOfWeek + ', ' + date.dayNumber + ' ' + date.monthName}}</h3>
-                <h3 class="weather__h3">{{ weatherStore.city }}</h3>
+                <h3 class="weather__location">
+                    <LocationIcon :color="'#b0b0b0'" />
+                    {{ weatherStore.city }}
+                </h3>
             </div>
         </section>
 
@@ -109,8 +112,13 @@
                 font-size: 7rem;
             }
 
-            &__span, &__desc, &__h3 {
+            &__span, &__desc, &__h3, &__location {
                 color: map-get($map: $colors, $key: c-font-gray);
+            }
+
+            &__location {
+                @include flex($justify-content: space-between);
+                gap: .5rem;
             }
 
             &__span {

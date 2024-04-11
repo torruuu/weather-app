@@ -2,59 +2,73 @@
   import AsideData from '@/components/AsideData.vue';
   import UnitButtons from '@/components/UnitButtons.vue';
   import ForecastDailyGallery from '@/components/ForecastDailyGallery.vue';
+  import LoadingPage from '@/components/LoadingPage.vue';
+  import ErrorPage from '@/components/ErrorPage.vue';
   import { getWeather } from '@/composables/getWeather';
   import { useWeatherStore } from '@/stores/weather';
+  import { useErrorStore } from '@/stores/error';
   import { useCityCoordinatesStore } from '@/stores/cities';
   import { onMounted, ref, watch  } from 'vue';
 
   const weatherStore = useWeatherStore();
   const citiesStore = useCityCoordinatesStore();
+  const errorStore = useErrorStore();
   const weatherData = ref(null);
+  const showError = ref(errorStore.getError);
 
-  watch(weatherStore, () => {
-    console.log('storeeeeeeeee')
-    weatherData.value = weatherStore.getWeatherData;
-    console.log(weatherData.value);
-  });
-
-  watch(citiesStore, () => {
+  async function getWeatherFunction() {
     getWeather()
       .then(() => {
         weatherData.value = weatherStore.getWeatherData;
       })
       .catch((error) => console.log(error));
+  }
+
+  watch(errorStore, () => {
+    if (errorStore.getError) {
+      showError.value = true;
+    }
+  })
+
+  watch(weatherStore, () => {
+    weatherData.value = weatherStore.getWeatherData;
+  });
+
+  watch(citiesStore, async () => {
+    getWeatherFunction();
   });
 
   onMounted(async () => {
-    getWeather()
-      .then(() => {
-        weatherData.value = weatherStore.getWeatherData;
-        console.log(weatherData);
-      })
-      .catch((error) => console.log(error));
+    setTimeout(async () => {
+      getWeatherFunction();
+    }, 5000)
   });
 </script>
 
 <template>
-  <main class="main">
-    <section class="main__left-col">
-      <AsideData
-        v-if="weatherData"
-      />
-    </section>
-    <section class="main__right-col">
-      <div class="main__right-data">
-        <UnitButtons
-          v-if="weatherData"
-          :currentUnit="weatherData?.unit.name"
-        />
-        <ForecastDailyGallery
-          v-if="weatherData"
-          :weatherData="weatherData?.data.daily"
-          :unit="weatherData?.unit.symbol"
-        />
-      </div>
-    </section>
+  <template v-if="weatherData">
+    <main class="main">
+        <section class="main__left-col">
+        <AsideData />
+      </section>
+      <section class="main__right-col">
+        <div class="main__right-data">
+          <UnitButtons
+            :currentUnit="weatherData?.unit.name"
+          />
+          <ForecastDailyGallery
+            :weatherData="weatherData?.data.daily"
+            :unit="weatherData?.unit.symbol"
+          />
+        </div>
+      </section>
+    </main>
+  </template>
+  <main v-else-if="!showError" class="main-exc">
+    <LoadingPage />
+  </main>
+  <main v-else class="main-exc">
+    <ErrorPage />
   </main>
 </template>
 
@@ -79,5 +93,11 @@
       @include flex(column, flex-start, flex-start);
       gap: 3rem;
     }
+  }
+
+  .main-exc {
+    width: 100%;
+    height: 100vh;
+    @include flex();
   }
 </style>
