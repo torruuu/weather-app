@@ -6,9 +6,7 @@ export const useErrorStore = defineStore('error', {
     }),
     getters: {
         getError: (state) => {
-            return () => {
-                return state.error;
-            }
+            return state.error;
         },
     },
     actions: {

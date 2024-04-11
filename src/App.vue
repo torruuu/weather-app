@@ -8,7 +8,7 @@
   import { useWeatherStore } from '@/stores/weather';
   import { useErrorStore } from '@/stores/error';
   import { useCityCoordinatesStore } from '@/stores/cities';
-  import { onMounted, ref, watch  } from 'vue';
+  import { onMounted, ref, watch } from 'vue';
 
   const weatherStore = useWeatherStore();
   const citiesStore = useCityCoordinatesStore();
@@ -21,14 +21,17 @@
       .then(() => {
         weatherData.value = weatherStore.getWeatherData;
       })
-      .catch((error) => console.log(error));
+      .catch(() => {
+        errorStore.setError(true);
+        showError.value = true;
+        console.log(errorStore.getError);
+      });
   }
 
-  watch(errorStore, () => {
-    if (errorStore.getError) {
-      showError.value = true;
-    }
-  })
+  async function reloadFunction() {
+    showError.value = false;
+    getWeatherFunction();
+  }
 
   watch(weatherStore, () => {
     weatherData.value = weatherStore.getWeatherData;
@@ -41,7 +44,7 @@
   onMounted(async () => {
     setTimeout(async () => {
       getWeatherFunction();
-    }, 5000)
+    }, 3000);
   });
 </script>
 
@@ -64,11 +67,11 @@
       </section>
     </main>
   </template>
-  <main v-else-if="!showError" class="main-exc">
+  <main v-else-if="showError === false" class="main-exc">
     <LoadingPage />
   </main>
   <main v-else class="main-exc">
-    <ErrorPage />
+    <ErrorPage @reload="reloadFunction" />
   </main>
 </template>
 

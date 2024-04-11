@@ -17,9 +17,9 @@
 <template>
     <article class="forecast-gallery">
         <ForecastDailyCard
-            v-for="(code, index) in weatherData.weather_code.slice(1)"
-            :key="code"
-            :weatherCode="code"
+            v-for="(code, index) in weatherData.temperature_2m_max.slice(1)"
+            :key="code + Math.random()"
+            :weatherCode="weatherData.weather_code.slice(1)[index]"
             :date="getDay(weatherData.time.slice(1)[index])"
             :max="weatherData.temperature_2m_max.slice(1)[index]"
             :min="weatherData.temperature_2m_min.slice(1)[index]"

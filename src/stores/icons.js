@@ -9,6 +9,7 @@ export const useIconsStore = defineStore('icons', {
             { code: 3, src: '/src/components/icons/WeatherIcon3.vue', desc: 'Overcast' },
             { code: 45, src: '/src/components/icons/WeatherIcon45.vue', desc: 'Fog' },
             { code: 48, src: '/src/components/icons/WeatherIcon48.vue', desc: 'Rime fog' },
+            { code: 53, src: '/src/components/icons/WeatherIcon48.vue', desc: 'Rime fog' },
             { code: 61, src: '/src/components/icons/WeatherIcon61.vue', desc: 'Sligth rain' },
             { code: 63, src: '/src/components/icons/WeatherIcon63.vue', desc: 'Moderate rain' },
             { code: 65, src: '/src/components/icons/WeatherIcon65.vue', desc: 'Heavy rain' },
