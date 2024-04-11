@@ -4,7 +4,6 @@ export function getDay(timestamp) {
     const tomorrow = new Date();
     tomorrow.setDate(today.getDate() + 1);
 
-    const isToday = date.toDateString() === today.toDateString();
     const isTomorrow = date.toDateString() === tomorrow.toDateString();
 
     // Devolver el día de la semana en español
@@ -15,5 +14,5 @@ export function getDay(timestamp) {
     const monthName = date.toLocaleString('en-US', { month: 'short' });
     const dayOfWeek = date.toLocaleString('en-US', { weekday: 'short' });
 
-    return { isToday, isTomorrow, dayOfWeek, dayNumber, monthName }
+    return { isTomorrow, dayOfWeek, dayNumber, monthName }
 }
