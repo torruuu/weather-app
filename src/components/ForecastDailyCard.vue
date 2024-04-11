@@ -1,5 +1,5 @@
 <script setup>
-import { useIconsStore } from '@/stores/icons';
+    import { useIconsStore } from '@/stores/icons';
     import { onBeforeMount, defineAsyncComponent, ref } from 'vue';
 
     const iconStore = useIconsStore();
@@ -30,6 +30,7 @@ import { useIconsStore } from '@/stores/icons';
     });
 
     onBeforeMount(async () => {
+        console.log('cartaaaaaaaa');
         const src = iconStore.getSrc(props.weatherCode);
         description.value = iconStore.getDesc(props.weatherCode);
         WeatherIcon = defineAsyncComponent(() => import(src));

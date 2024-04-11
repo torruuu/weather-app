@@ -11,8 +11,10 @@ export const useCityCoordinatesStore = defineStore('cityCoordinates', {
         actualCity: { name: 'Paris', latitude: 48.8566, longitude: 2.3522 }
     }),
     getters: {
-        getCityCoordinates(cityName) {
-            return this.cities.find(city => city.name === cityName);
+        getCityCoordinates: (state) => {
+            return (cityName) => {
+                return state.cities.find(city => city.name === cityName);
+            }
         },
         getCityNames() {
             return this.cities.map(city => city.name);

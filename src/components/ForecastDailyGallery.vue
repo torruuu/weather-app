@@ -2,7 +2,7 @@
     import ForecastDailyCard from '@/components/ForecastDailyCard.vue';
     import { getDay } from '@/utils/getDay';
 
-    const props = defineProps({
+    defineProps({
         weatherData: {
             type: Object,
             required: true
@@ -12,25 +12,17 @@
             required: true
         }
     })
-    const 
-    {
-        temperature_2m_max: maxTemps,
-        temperature_2m_min: minTemps,
-        weather_code: weatherCodes,
-        time: unixtimes
-    } = props.weatherData;
-    console.log(maxTemps);
 </script>
 
 <template>
     <article class="forecast-gallery">
         <ForecastDailyCard
-            v-for="(code, index) in weatherCodes.slice(1)"
+            v-for="(code, index) in weatherData.weather_code.slice(1)"
             :key="index"
             :weatherCode="code"
-            :date="getDay(unixtimes.slice(1)[index])"
-            :max="maxTemps.slice(1)[index]"
-            :min="minTemps.slice(1)[index]"
+            :date="getDay(weatherData.time.slice(1)[index])"
+            :max="weatherData.temperature_2m_max.slice(1)[index]"
+            :min="weatherData.temperature_2m_min.slice(1)[index]"
             :unit="unit"
         />
     </article>

@@ -55,11 +55,13 @@
             </div>
         </section>
 
-        <section v-if="showNav" class="aside-container__nav">
-            <AsideNav
-                @exit="showNav = !showNav"
-            />
-        </section>
+        <Transition>
+            <section v-if="showNav" class="aside-container__nav">
+                <AsideNav
+                    @exit="showNav = !showNav"
+                />
+            </section>
+        </Transition>
     </article>
 </template>
 
@@ -133,6 +135,12 @@
             z-index: 2;
             top: 0;
             left: 0;
+            transition: all 1s ease;
         }
+    }
+
+    .v-enter-from,
+    .v-leave-to {
+        transform: translateX(-100%);
     }
 </style>
