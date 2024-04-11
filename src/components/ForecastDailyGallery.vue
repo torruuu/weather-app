@@ -18,7 +18,7 @@
     <article class="forecast-gallery">
         <ForecastDailyCard
             v-for="(code, index) in weatherData.weather_code.slice(1)"
-            :key="index"
+            :key="code"
             :weatherCode="code"
             :date="getDay(weatherData.time.slice(1)[index])"
             :max="weatherData.temperature_2m_max.slice(1)[index]"
