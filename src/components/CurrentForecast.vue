@@ -10,6 +10,7 @@
 </script>
 
 <template>
+    <h3 class="title">Today's Highlights</h3>
     <article class="current-info">
         <CurrentCard
             title="Wind Status"
@@ -35,6 +36,10 @@
 </template>
 
 <style lang="scss" scoped>
+    .title {
+        font-size: 2rem;
+    }
+
     .current-info {
         width: 100%;
         display: grid;

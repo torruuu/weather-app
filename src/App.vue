@@ -40,6 +40,7 @@
   });
 
   watch(citiesStore, async () => {
+    weatherData.value = undefined;
     getWeatherFunction();
   });
 
