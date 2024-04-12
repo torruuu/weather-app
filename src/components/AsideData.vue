@@ -104,7 +104,7 @@
 
                 svg {
                     width: 100%;
-                    height: 150%;
+                    height: 140%;
                 }
             }
 

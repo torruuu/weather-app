@@ -52,7 +52,7 @@
 
 <style lang="scss" scoped>
     .forecast-card {
-        height: 15rem;
+        height: 16rem;
         background-color: map-get($map: $colors, $key: c-section-background);
         padding: 1.5rem;
         @include flex($direction: column, $justify-content: space-between);
@@ -84,6 +84,12 @@
                     color: map-get($map: $colors, $key: c-font-gray);
                 }
             }
+        }
+    }
+
+    @media screen and (min-width: 800px) and (max-width: 921px) {
+        .forecast-card {
+            height: 21rem; /* Cambia el valor a lo que necesites */
         }
     }
 </style>

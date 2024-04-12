@@ -3,7 +3,7 @@
 </style>
 
 <template>
-    <svg width="56" height="48" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 48" preserveAspectRatio="xMidYMid meet">
+    <svg width="56" height="48" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="-28 -24 56 48" preserveAspectRatio="xMidYMid meet">
     <defs>
         <filter id="blur" x="-.34167" y="-.34167" width="1.6833" height="1.85">
         <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -17,7 +17,7 @@
         </feMerge>
         </filter>
     </defs>
-    <g id="day" transform="translate(16,14)" filter="url(#blur)">
+    <g id="day" transform="translate(0,-7)" filter="url(#blur)">
         <g class="am-weather-sun">
         <line transform="translate(0,9)" y2="3" fill="none" stroke="#ffa500" stroke-linecap="round" stroke-width="2" />
         <g transform="rotate(45)">
@@ -44,5 +44,6 @@
         <circle r="5" fill="#ffa500" stroke="#ffa500" stroke-width="2" />
         </g>
     </g>
-    </svg>
+</svg>
+
 </template>
