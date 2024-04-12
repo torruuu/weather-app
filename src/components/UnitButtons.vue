@@ -23,7 +23,7 @@
 </script>
 
 <template>
-    <section class="unit-buttons-section">
+    <article class="unit-buttons-section">
         <button
             @click="() => celsius = true"
             :class="{ highlighted: currentUnit === 'celsius' }"
@@ -36,7 +36,7 @@
             class="unit-buttons-section__button">
             º F
         </button>
-    </section>
+    </article>
 </template>
 
 <style lang="scss" scoped>

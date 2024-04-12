@@ -2,6 +2,7 @@
   import AsideData from '@/components/AsideData.vue';
   import UnitButtons from '@/components/UnitButtons.vue';
   import ForecastDailyGallery from '@/components/ForecastDailyGallery.vue';
+  import CurrentForecast from '@/components/CurrentForecast.vue';
   import LoadingPage from '@/components/LoadingPage.vue';
   import ErrorPage from '@/components/ErrorPage.vue';
   import { getWeather } from '@/composables/getWeather';
@@ -20,6 +21,7 @@
     getWeather()
       .then(() => {
         weatherData.value = weatherStore.getWeatherData;
+        console.log(weatherData.value);
       })
       .catch(() => {
         errorStore.setError(true);
@@ -63,6 +65,9 @@
             :weatherData="weatherData?.data.daily"
             :unit="weatherData?.unit.symbol"
           />
+          <CurrentForecast
+            :weatherData="weatherData?.data"
+          />
         </div>
       </section>
     </main>
@@ -87,14 +92,15 @@
     }
 
     &__right-col {
+      height: 100vh;
       padding: 2rem 0;
     }
 
     &__right-data {
       margin: 0 auto;
       width: 75%;
-      @include flex(column, flex-start, flex-start);
-      gap: 3rem;
+      height: 100%;
+      @include flex(column, flex-start, space-between);
     }
   }
 
