@@ -93,15 +93,16 @@
     }
 
     &__right-col {
-      height: 100vh;
+      min-height: 100vh;
       padding: 2rem 0;
     }
 
     &__right-data {
       margin: 0 auto;
       width: 75%;
-      height: 100%;
+      min-height: 100%;
       @include flex(column, flex-start, space-between);
+      gap: 1rem;
     }
   }
 
